@@ -83,11 +83,6 @@ const customerpo = require('./route/customer_po');
 app.use('/api/customerpo', customerpo);
 const shippingorder = require('./route/shipping_order');
 app.use('/api/shippingorder', shippingorder);
-const palletscan = require('./route/2_palletscan');
-app.use('/api/palletscan', palletscan);
-const productscan = require('./route/3_productscan');
-const { log, Console } = require('console');
-app.use('/api/productscan', productscan);
 
 app.listen(3000, function () {
   console.log('listening on 3000');
