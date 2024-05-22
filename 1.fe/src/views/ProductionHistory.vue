@@ -5,10 +5,16 @@
     <hr />
     <br />
     <div>
-      From <input type="date" v-model="dateValue1" /> To
-      <input type="date" v-model="dateValue2" />
+      From
+      <input
+        type="date"
+        style="margin-left: 0.5rem; margin-right: 1rem"
+        v-model="dateValue1"
+      />
+      To
+      <input type="date" style="margin-left: 0.5rem" v-model="dateValue2" />
       <label style="margin-left: 2rem" for="select">Choose Line:</label>
-      <select id="select" v-model="line">
+      <select id="select" v-model="line" style="margin-left: 0.5rem">
         <option value="%">--ALL--</option>
         <option v-for="a in lines" :key="a" :value="a.LINE_CD">
           {{ a.LINE_CD }}
@@ -17,7 +23,11 @@
       <button class="btn" style="margin-left: 2rem" @click="getPallets">
         Search
       </button>
-      <button class="btn" style="margin-left: 2rem" @click="excelExport">
+      <button
+        class="btn"
+        style="margin-left: 2rem; background-color: darkorange"
+        @click="excelExport"
+      >
         Export
       </button>
     </div>

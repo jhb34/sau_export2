@@ -51,6 +51,13 @@ const routes = [
     meta: { requiresAuth: true },
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/ProductionHistory.vue')
+  },
+  {
+    path: '/shippingorder',
+    name: 'shippingorder',
+    meta: { requiresAuth: true },
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/ShippingOrder.vue')
   }
 ]
 

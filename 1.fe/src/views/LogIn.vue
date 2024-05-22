@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h2>Login</h2>
+    <h1>Login</h1>
+    <br />
+    <hr />
+    <br />
     <form @submit.prevent="login">
       <input type="text" v-model="username" placeholder="Username" required />
       <input
         type="password"
         v-model="password"
         placeholder="Password"
+        style="margin-left: 0.5rem; margin-right: 0.5rem"
         required
       />
       <button type="submit" class="btn">Login</button>

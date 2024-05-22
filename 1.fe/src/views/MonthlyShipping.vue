@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>Monthly Shipping Record</h1>
+    <h1>Monthly Shipping Qty</h1>
     <br />
     <hr />
     <br />
     <div>
       <input type="month" v-model="dateValue" />
       <label for="select" style="margin-left: 2rem">Choose Customer:</label>
-      <select id="select" v-model="customer">
+      <select id="select" style="margin-left: 0.5rem" v-model="customer">
         <option value="%">--ALL--</option>
         <option value="S1300">MAL</option>
         <option value="S1301">MGA</option>
@@ -16,7 +16,11 @@
       <button class="btn" style="margin-left: 2rem" @click="getData">
         Search
       </button>
-      <button class="btn" style="margin-left: 2rem" @click="excelExport">
+      <button
+        class="btn"
+        style="margin-left: 2rem; background-color: darkorange"
+        @click="excelExport"
+      >
         Export
       </button>
     </div>

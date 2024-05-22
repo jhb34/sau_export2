@@ -11,9 +11,16 @@
         <router-link class="link" to="/production"
           >Production History</router-link
         >
-        <router-link class="link" to="/customerpo">Customer PO</router-link>
-        <router-link class="link" to="/daily">Daily Shipping</router-link>
-        <router-link class="link" to="/monthly">Monthly Shipping</router-link>
+        <router-link class="link" to="/customerpo"
+          >Customer PO Manager</router-link
+        >
+        <router-link class="link" to="/shippingorder"
+          >Shipping Order</router-link
+        >
+        <router-link class="link" to="/daily">Daily Shipping Qty</router-link>
+        <router-link class="link" to="/monthly"
+          >Monthly Shipping Qty</router-link
+        >
       </div>
     </div>
     <div v-else>
@@ -95,6 +102,7 @@ export default {
   padding: 1rem;
   text-transform: capitalize;
   letter-spacing: 1px;
+  font-size: 0.7rem;
 }
 .link:hover {
   background-color: lightskyblue;
@@ -136,6 +144,7 @@ export default {
     text-align: center;
     width: 100%;
     display: block;
+    font-size: 1rem;
   }
   .out {
     padding-top: 1rem;

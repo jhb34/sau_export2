@@ -1,5 +1,7 @@
 <template>
-  <div>You're logined. please choose menu</div>
+  <br />
+  <br />
+  <h1>You're logged in. please choose menu</h1>
 </template>
 
 <script>

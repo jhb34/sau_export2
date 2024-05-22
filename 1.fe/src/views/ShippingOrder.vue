@@ -1,18 +1,16 @@
 <template>
   <div>
-    <h1>Daily Shipping Qty</h1>
+    <h1>Shipping Order</h1>
     <br />
     <hr />
     <br />
     <div>
-      From
+      Date :
       <input
         type="date"
         style="margin-left: 0.5rem; margin-right: 1rem"
         v-model="dateValue1"
       />
-      To
-      <input type="date" v-model="dateValue2" />
       <label for="select" style="margin-left: 2rem">Choose Customer:</label>
       <select id="select" style="margin-left: 0.5rem" v-model="customer">
         <option value="%">--ALL--</option>
@@ -20,7 +18,7 @@
         <option value="S1301">MGA</option>
         <option value="S0800">HMMA</option>
       </select>
-      <button class="btn" style="margin-left: 2rem" @click="getData">
+      <button class="btn" style="margin-left: 2rem" @click="getOrder">
         Search
       </button>
       <button
@@ -31,18 +29,39 @@
         Export
       </button>
     </div>
-    <table class="table table-hover">
-      <thead class="table-dark">
-        <tr style="position: sticky; top: 0">
-          <th v-for="b in headers" :key="b">{{ b.title }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="a in data" :key="a">
-          <td v-for="c in headers" :key="c">{{ a[c.key] }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <table class="table table-hover" style="float: left">
+        <thead class="table-dark">
+          <tr style="position: sticky; top: 0">
+            <th v-for="b in headers1" :key="b">{{ b.title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="a in order"
+            :key="a"
+            @click="getList(a.SAL_YMD, a.CUST_CD, a.TRAILER_NO)"
+          >
+            <td v-for="c in headers1" :key="c">
+              {{ a[c.key] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="float: left; width: 2rem; visibility: hidden">as</div>
+      <table class="table table-hover" style="float: left">
+        <thead class="table-dark">
+          <tr style="position: sticky; top: 0">
+            <th v-for="b in headers2" :key="b">{{ b.title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="a in data" :key="a">
+            <td v-for="c in headers2" :key="c">{{ a[c.key] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 <script>
@@ -50,15 +69,20 @@ export default {
   components: {},
   data() {
     return {
-      headers: [
-        { title: 'Customer', key: 'cust_cd' },
-        { title: 'Part_No', key: 'itmno' },
-        { title: 'Part_Name', key: 'itm_nm' }
+      headers1: [{ title: 'TRAILER NO', key: 'TRAILER_NO' }],
+      headers2: [
+        { title: 'Date', key: 'SAL_YMD' },
+        { title: 'CUSTOMER', key: 'CUST_CD' },
+        { title: 'TRAILER NO', key: 'TRAILER_NO' },
+        { title: 'Item No', key: 'ITMNO' },
+        { title: 'Item Name', key: 'ITM_NM' },
+        { title: 'QTY', key: 'ORD_QTY' }
       ],
       dateValue1: new Date().toISOString().slice(0, 10),
       dateValue2: new Date().toISOString().slice(0, 10),
       customer: '%',
       data: '',
+      order: '',
       dategroup: ''
     }
   },
@@ -118,11 +142,44 @@ export default {
       console.log(r.data.recordset)
       this.data = r.data.recordset
     },
+    async getOrder() {
+      const r = await this.$post('/api/shippingorder/getorder', {
+        params: {
+          date1: this.dateValue1,
+          customer: this.customer
+        }
+      })
+      console.log(r)
+      if (r === undefined) {
+        alert('Error at getData')
+        return
+      }
+      console.log(r.data.recordset)
+      this.order = r.data.recordset
+      this.data = ''
+    },
+    async getList(a, b, c) {
+      console.log(a, b, c)
+      const r = await this.$post('/api/shippingorder/getlist', {
+        params: {
+          date: a,
+          customer: b,
+          trailer: c
+        }
+      })
+      console.log(r)
+      if (r === undefined) {
+        alert('Error at getData')
+        return
+      }
+      console.log(r.data.recordset)
+      this.data = r.data.recordset
+    },
     excelExport() {
       if (this.data === '') {
         return alert('There is no data to Export')
       }
-      this.$excelFromTable(this.headers, this.data, 'Export', {})
+      this.$excelFromTable(this.headers2, this.data, 'Export', {})
     }
   }
 }
