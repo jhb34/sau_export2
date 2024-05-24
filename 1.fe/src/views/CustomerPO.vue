@@ -299,7 +299,7 @@ export default {
         const r = await this.$post('/api/customerpo/add', {
           param: this.po
         })
-        this.$refs.modalclose.click()
+        this.reset()
         if (r.status === 200) {
           alert('Saved! PO has been saved.')
         } else {
@@ -316,7 +316,7 @@ export default {
           id: this.id,
           param: this.po
         })
-        this.$refs.modalclose.click()
+        this.reset()
         if (r.status === 200) {
           alert('Changed! PO has been changed.')
         } else {
@@ -329,7 +329,7 @@ export default {
       const del = confirm('Do you really want to delete?')
       if (del) {
         const r = await this.$post('/api/customerpo/delete', this.id)
-        this.$refs.modalclose.click()
+        this.reset()
         if (r.status === 200) {
           alert('Deleted! PO has been deleted.')
         } else {
@@ -403,7 +403,7 @@ export default {
 }
 .modal-container {
   background: white;
-  width: 30vw;
+  width: 40vw;
   height: 80vh;
   border-radius: 0.25rem;
   max-width: 1120px;

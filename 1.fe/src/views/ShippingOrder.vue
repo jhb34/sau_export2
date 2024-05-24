@@ -139,7 +139,7 @@ export default {
         alert('Error at getData')
         return
       }
-      console.log(r.data.recordset)
+      // console.log(r.data.recordset)
       this.data = r.data.recordset
     },
     async getOrder() {
@@ -149,17 +149,17 @@ export default {
           customer: this.customer
         }
       })
-      console.log(r)
+      // console.log(r)
       if (r === undefined) {
         alert('Error at getData')
         return
       }
-      console.log(r.data.recordset)
+      // console.log(r.data.recordset)
       this.order = r.data.recordset
       this.data = ''
     },
     async getList(a, b, c) {
-      console.log(a, b, c)
+      // console.log(a, b, c)
       const r = await this.$post('/api/shippingorder/getlist', {
         params: {
           date: a,
@@ -167,12 +167,12 @@ export default {
           trailer: c
         }
       })
-      console.log(r)
+      // console.log(r)
       if (r === undefined) {
         alert('Error at getData')
         return
       }
-      console.log(r.data.recordset)
+      // console.log(r.data.recordset)
       this.data = r.data.recordset
     },
     excelExport() {

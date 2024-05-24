@@ -69,7 +69,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // 인증이 필요한 페이지인 경우
-    const period = 1000 * 60 * 30 // 30분
+    const period = 1000 * 60 * 60 * 8 // 8시간
     const now = new Date()
     const time = now.getTime()
     const logintime = VueCookies.get('userCookie').time

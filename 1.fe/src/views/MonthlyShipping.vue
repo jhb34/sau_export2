@@ -79,7 +79,7 @@ export default {
       const r = await this.$post('/api/monthlyshipping', {
         params: { date: this.dateValue, customer: this.customer }
       })
-      console.log(r)
+      // console.log(r)
       if (r === undefined) {
         alert('Error at getData')
         return

@@ -45,7 +45,7 @@ export default {
         const now = new Date()
         const time = now.getTime()
         console.log(time)
-        this.$cookies.set('userCookie', { user, time }, '30min')
+        this.$cookies.set('userCookie', { user, time }, '8h')
         this.$store.commit('setUser', user)
         this.$router.push('/main') // 메인 화면으로 이동
       } else {

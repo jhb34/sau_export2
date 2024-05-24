@@ -1,12 +1,17 @@
 <template>
   <div class="sidebar-container">
     <div v-if="user" class="content">
+      <font-awesome-icon
+        :icon="['fas', 'bars']"
+        class="icon"
+        @click="modalOpen"
+      />
       <h3 class="user">
         Welcome <br />
         <span class="sabun">{{ user }}</span>
       </h3>
       <button class="logout btn" @click="logout">Logout</button>
-      <div class="links">
+      <div class="big-links">
         <router-link class="link" to="/main">Main</router-link>
         <router-link class="link" to="/production"
           >Production History</router-link
@@ -22,6 +27,33 @@
           >Monthly Shipping Qty</router-link
         >
       </div>
+      <div class="modal">
+        <div :class="['modal-overlay', { 'show-modal': isModalShow }]">
+          <div class="modal-links">
+            <button type="button" class="close-modal-btn" @click="modalClose">
+              X
+            </button>
+            <router-link class="link" @click="modalClose" to="/main"
+              >Main</router-link
+            >
+            <router-link class="link" @click="modalClose" to="/production"
+              >Production History</router-link
+            >
+            <router-link class="link" @click="modalClose" to="/customerpo"
+              >Customer PO Manager</router-link
+            >
+            <router-link class="link" @click="modalClose" to="/shippingorder"
+              >Shipping Order</router-link
+            >
+            <router-link class="link" @click="modalClose" to="/daily"
+              >Daily Shipping Qty</router-link
+            >
+            <router-link class="link" @click="modalClose" to="/monthly"
+              >Monthly Shipping Qty</router-link
+            >
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else>
       <div class="out">
@@ -36,7 +68,7 @@ export default {
   components: {},
   data() {
     return {
-      sampleData: ''
+      isModalShow: false
     }
   },
   computed: {
@@ -61,17 +93,71 @@ export default {
       this.$cookies.remove('userCookie')
       this.$store.commit('setUser', null)
       this.$router.push('/login')
+    },
+    modalOpen() {
+      this.isModalShow = true
+    },
+    modalClose() {
+      this.isModalShow = false
     }
   }
 }
 </script>
 <style scoped>
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .sidebar-container {
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
   background: #167bff;
   font-weight: 700;
   min-height: 5vh;
   height: 100%;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+}
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+  transition-property: opacity;
+  transition-duration: 0.1s;
+}
+.modal-links {
+  background: white;
+  width: 50vw;
+  height: 50vh;
+  border-radius: 0.25rem;
+  max-width: 1120px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.close-modal-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  background: transparent;
+  padding: 0 5px;
+  cursor: pointer;
+  color: red;
 }
 .content {
   display: flex;
@@ -91,10 +177,8 @@ export default {
   letter-spacing: 1px;
   background: rgb(216, 22, 22);
 }
-.links {
-  display: flex;
-  align-items: center;
-  padding-left: 5rem;
+.big-links {
+  display: none;
 }
 .link {
   background: white;
@@ -102,7 +186,7 @@ export default {
   padding: 1rem;
   text-transform: capitalize;
   letter-spacing: 1px;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 .link:hover {
   background-color: lightskyblue;
@@ -116,6 +200,9 @@ export default {
   padding-left: 2rem;
 }
 @media (min-width: 992px) {
+  .icon {
+    display: none;
+  }
   .sidebar-container {
     min-height: 100vh;
     height: 100%;
@@ -134,11 +221,15 @@ export default {
     margin-left: 0;
     margin-top: 1rem;
   }
-  .links {
+  .big-links {
+    display: block;
     width: 90%;
     padding-top: 2rem;
     padding-left: 0;
     flex-direction: column;
+  }
+  .modal {
+    display: none;
   }
   .link {
     text-align: center;

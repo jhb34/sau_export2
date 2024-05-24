@@ -7,6 +7,7 @@ const sql = require('mssql');
 router.post('/add', (req, res) => {
   // const { partnumber, customercode } = req.body.param;
   const po = req.body.param;
+  console.log(po);
   const request = new sql.Request();
   request.query(
     `insert into TB_PO_INFO (PART_NO,CUST_CODE,CUST_PART,PO_NO,LINE_NO,CUST_NAME,SHIP_TO_PLANT,UOM,SUPPLIER_NAME,SUPPLIER_CODE,DOCK_NO,PART_DESC) values('${po.PART_NO}','${po.CUST_CODE}','${po.CUST_PART}','${po.PO_NO}','${po.LINE_NO}','${po.CUST_NAME}','${po.SHIP_TO_PLANT}','${po.UOM}','${po.SUPPLIER_NAME}','${po.SUPPLIER_CODE}','${po.DOCK_NO}','${po.PART_DESC}')`,

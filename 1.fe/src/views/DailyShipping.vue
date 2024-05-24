@@ -110,12 +110,12 @@ export default {
           dategroup: this.dategroup
         }
       })
-      console.log(r)
+      // console.log(r)
       if (r === undefined) {
         alert('Error at getData')
         return
       }
-      console.log(r.data.recordset)
+      // console.log(r.data.recordset)
       this.data = r.data.recordset
     },
     excelExport() {

@@ -127,12 +127,12 @@ export default {
           line: this.line
         }
       })
-      console.log(r)
+      // console.log(r)
       if (r === undefined) {
         alert('Error at getData')
         return
       }
-      console.log(r.data.recordset)
+      // console.log(r.data.recordset)
       this.pallets = r.data.recordset
     },
     excelExport() {
