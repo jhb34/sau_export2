@@ -143,7 +143,7 @@ app.post('/api/monthlyshipping', (req, res) => {
   const customer = params.customer;
   const request = new sql.Request();
   request.query(
-    `SELECT s.CUST_CD, s.ITMNO, s.QTY, B.ITM_NM 
+    `SELECT s.CUST_CD, s.ITMNO, s.QTY, B.ITM_NM,B.CHAJ_CD
     FROM (
         SELECT CUST_CD, 
     case
@@ -178,9 +178,9 @@ app.post('/api/dailyshipping', (req, res) => {
   const request = new sql.Request();
   request.query(
     `
-    SELECT cust_cd, itmno, itm_nm, ${dategroup}
+    SELECT cust_cd, CHAJ_CD, itmno, itm_nm, ${dategroup}
     FROM (
-        SELECT A.cust_cd, A.itmno, ISNULL(A.scan_qty, 0) AS scan_qty, A.sal_ymd, B.ITM_NM
+        SELECT A.cust_cd, A.itmno, ISNULL(A.scan_qty, 0) AS scan_qty, A.sal_ymd,B.CHAJ_CD, B.ITM_NM
         FROM sal_order A
         LEFT JOIN ITM_MST B ON A.itmno = B.itmno
         WHERE A.sal_ymd BETWEEN '${date1}' AND '${date2}' and A.cust_cd like '${customer}'

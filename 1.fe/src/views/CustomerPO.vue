@@ -35,6 +35,9 @@
       <button class="btn" style="margin-left: 5rem" @click="isModalShow = true">
         Add New PO
       </button>
+      <span style="margin-left: 2rem; font-weight: 500"
+        >( MAL: S1300 / MGA: S1301 / HMMA: S0800 )</span
+      >
     </div>
     <table class="table table-hover">
       <thead class="table-dark">

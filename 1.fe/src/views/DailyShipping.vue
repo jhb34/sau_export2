@@ -30,6 +30,9 @@
       >
         Export
       </button>
+      <span style="margin-left: 2rem; font-weight: 500"
+        >( MAL: S1300 / MGA: S1301 / HMMA: S0800 )</span
+      >
     </div>
     <table class="table table-hover">
       <thead class="table-dark">
@@ -39,6 +42,7 @@
       </thead>
       <tbody>
         <tr v-for="a in data" :key="a">
+          <!-- <td v-for="c in headers" :key="c">{{ a[c.key] }}</td> -->
           <td v-for="c in headers" :key="c">{{ a[c.key] }}</td>
         </tr>
       </tbody>
@@ -52,6 +56,7 @@ export default {
     return {
       headers: [
         { title: 'Customer', key: 'cust_cd' },
+        { title: 'Type', key: 'CHAJ_CD' },
         { title: 'Part_No', key: 'itmno' },
         { title: 'Part_Name', key: 'itm_nm' }
       ],
@@ -76,6 +81,7 @@ export default {
       let currentDate = new Date(start) // 시작 날짜를 복사하여 사용
       const headers = [
         { title: 'Customer', key: 'cust_cd' },
+        { title: 'Type', key: 'CHAJ_CD' },
         { title: 'Part_No', key: 'itmno' },
         { title: 'Part_Name', key: 'itm_nm' }
       ] // 새로운 헤더를 저장할 배열

@@ -28,6 +28,9 @@
       >
         Export
       </button>
+      <span style="margin-left: 2rem; font-weight: 500"
+        >( MAL: S1300 / MGA: S1301 / HMMA: S0800 )</span
+      >
     </div>
     <div>
       <table class="table table-hover" style="float: left">

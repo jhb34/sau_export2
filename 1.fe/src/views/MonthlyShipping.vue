@@ -23,11 +23,15 @@
       >
         Export
       </button>
+      <span style="margin-left: 2rem; font-weight: 500"
+        >( MAL: S1300 / MGA: S1301 / HMMA: S0800 )</span
+      >
     </div>
     <table class="table table-hover">
       <thead class="table-dark">
         <tr style="position: sticky; top: 0">
           <th>Customer</th>
+          <th>Type</th>
           <th>Part No</th>
           <th>Part Name</th>
           <th>Shipping Qty</th>
@@ -36,16 +40,9 @@
       <tbody>
         <tr v-for="a in data" :key="a">
           <td>
-            {{
-              a.CUST_CD === 'S1300'
-                ? 'MAL'
-                : a.CUST_CD === 'S1301'
-                ? 'MGA'
-                : a.CUST_CD === 'S0800'
-                ? 'HMMA'
-                : null
-            }}
+            {{ a.CUST_CD }}
           </td>
+          <td>{{ a.CHAJ_CD }}</td>
           <td>{{ a.ITMNO }}</td>
           <td>{{ a.ITM_NM }}</td>
           <td>{{ a.QTY }}</td>
@@ -61,6 +58,7 @@ export default {
     return {
       headers: [
         { title: 'Customer', key: 'CUST_CD' },
+        { title: 'Type', key: 'CHAJ_CD' },
         { title: 'Part_No', key: 'ITMNO' },
         { title: 'Part_Name', key: 'ITM_NM' },
         { title: 'Qty', key: 'QTY' }
